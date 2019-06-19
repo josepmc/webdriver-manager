@@ -92,6 +92,12 @@ const outDirOption: yargs.Options = {
   describe: 'Location of output.',
   type: 'string'
 };
+const RELATIVE_PATHS = 'relativePaths';
+const relativePathsOption: yargs.Options = {
+  describe: 'Use relative paths when storing file paths.',
+  default: false,
+  type: 'boolean'
+};
 const PROXY = 'proxy';
 const proxyOption: yargs.Options = {
   describe: 'Use a proxy server to download files.',
@@ -181,6 +187,7 @@ yargs
               .alias(IEDRIVER_ALIAS, IEDRIVER)
               .option(LOG_LEVEL, logLevelOption)
               .option(OUT_DIR, outDirOption)
+              .option(RELATIVE_PATHS, relativePathsOption)
               .option(SELENIUM, seleniumOption)
               .alias(SELENIUM_ALIAS, SELENIUM)
               .option(SELENIUM_LOG_LEVEL, seleniumLogLevelOption)
@@ -229,6 +236,7 @@ yargs
               .alias(MAX_VERSIONS_IEDRIVER_ALIAS, MAX_VERSIONS_IEDRIVER)
               .option(MAX_VERSIONS_SELENIUM, maxVersionsSeleniumOption)
               .option(OUT_DIR, outDirOption)
+              .option(RELATIVE_PATHS, relativePathsOption)
               .option(PROXY, proxyOption)
               .option(SELENIUM, seleniumOption)
               .alias(SELENIUM_ALIAS, SELENIUM)

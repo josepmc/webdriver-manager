@@ -1,6 +1,6 @@
 {
-  "name": "webdriver-manager",
-  "version": "13.0.0",
+  "name": "@josepmc/webdriver-manager",
+  "version": "13.0.0-1",
   "description": "webdriver-manager",
   "bin": {
     "webdriver-manager": "bin/webdriver-manager"
@@ -48,14 +48,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/angular/webdriver-manager.git"
+    "url": "git+https://github.com/josepmc/webdriver-manager.git"
   },
-  "author": "Craig Nishina <craig.nishina@gmail.com>",
+  "author": "Josep Mateu Clemente <jmateu.clemente@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/angular/webdriver-manager/issues"
+    "url": "https://github.com/josepmc/webdriver-manager/issues"
   },
-  "homepage": "https://github.com/angular/webdriver-manager#readme",
+  "homepage": "https://github.com/josepmc/webdriver-manager#readme",
   "dependencies": {
     "adm-zip": "^0.4.13",
     "loglevel": "^1.6.1",

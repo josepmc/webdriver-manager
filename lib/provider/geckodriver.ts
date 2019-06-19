@@ -20,6 +20,7 @@ export class GeckoDriver extends ProviderClass implements ProviderInterface {
   osType = os.type();
   osArch = os.arch();
   outDir = OUT_DIR;
+  relativePaths = false;
   proxy: string = null;
   requestUrl = 'https://api.github.com/repos/mozilla/geckodriver/releases';
   seleniumFlag = '-Dwebdriver.gecko.driver';
@@ -34,6 +35,7 @@ export class GeckoDriver extends ProviderClass implements ProviderInterface {
     this.osArch = this.setVar('osArch', this.osArch, config);
     this.osType = this.setVar('osType', this.osType, config);
     this.outDir = this.setVar('outDir', this.outDir, config);
+    this.relativePaths = this.setVar('relativePaths', this.relativePaths, config);
     this.proxy = this.setVar('proxy', this.proxy, config);
     this.requestUrl = this.setVar('requestUrl', this.requestUrl, config);
     this.oauthToken = this.setVar('oauthToken', this.oauthToken, config);
@@ -108,7 +110,7 @@ export class GeckoDriver extends ProviderClass implements ProviderInterface {
     changeFilePermissions(renamedFileName, '0755', this.osType);
     generateConfigFile(
         this.outDir, path.resolve(this.outDir, this.configFileName),
-        matchBinaries(this.osType), renamedFileName);
+        matchBinaries(this.osType), renamedFileName, this.relativePaths);
     return Promise.resolve();
   }
 

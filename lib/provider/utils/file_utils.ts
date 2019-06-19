@@ -167,6 +167,27 @@ export function changeFilePermissions(
   }
 }
 
+function relativeToAbsolute(outputDir: string, obj: any, invert: boolean = false): any {
+  if (obj instanceof Array) {
+    let newObj = [];
+    for (let key of obj) {
+      newObj.push(relativeToAbsolute(outputDir, key, invert));
+    }
+    return newObj;
+  } else if (obj instanceof Object) {
+    let newObj: {[k: string]: any} = {};
+    for (let key in obj) {
+      newObj[key] = relativeToAbsolute(outputDir, obj[key], invert);
+    }
+    return newObj;
+  } else {
+    // string
+    if (!invert && !path.isAbsolute(obj)) return path.resolve(outputDir, obj);
+    if (invert && path.isAbsolute(obj)) return path.relative(outputDir, obj);
+    else return obj;
+  }
+}
+
 /**
  * Writes a config file that matches the regex pattern.
  * @param outDir The output directory.
@@ -176,12 +197,15 @@ export function changeFilePermissions(
  */
 export function generateConfigFile(
     outDir: string, fileName: string, fileBinaryPathRegex: RegExp,
-    lastFileBinaryPath?: string) {
-  const configData: JsonObject = {};
+    lastFileBinaryPath?: string, relativePaths: boolean = false) {
+  let configData: JsonObject = {};
   if (lastFileBinaryPath) {
     configData['last'] = lastFileBinaryPath;
   }
   configData['all'] = getMatchingFiles(outDir, fileBinaryPathRegex);
+  if(relativePaths) {
+    configData = relativeToAbsolute(path.dirname(fileName), configData, true);
+  }
   fs.writeFileSync(fileName, JSON.stringify(configData, null, 2));
 }
 
@@ -222,6 +246,11 @@ export function getBinaryPathFromConfig(
         binaryPath = cachePath;
       }
     }
+  }
+  if(!path.isAbsolute(binaryPath) && !fs.existsSync(binaryPath)) {
+    let resolved = path.resolve(path.basename(cacheFilePath), binaryPath);
+    if(fs.existsSync(resolved)) binaryPath = resolved;
+    else console.error(`Error loading path from config: File ${binaryPath} doesn't exist.`);
   }
   return binaryPath;
 }

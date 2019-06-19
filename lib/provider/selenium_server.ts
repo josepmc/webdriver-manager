@@ -27,6 +27,7 @@ export class SeleniumServer extends ProviderClass implements ProviderInterface {
   osType = os.type();
   osArch = os.arch();
   outDir = OUT_DIR;
+  relativePaths = false;
   port = 4444;
   proxy: string = null;
   requestUrl = 'https://selenium-release.storage.googleapis.com/';
@@ -46,6 +47,7 @@ export class SeleniumServer extends ProviderClass implements ProviderInterface {
     this.osArch = this.setVar('osArch', this.osArch, config);
     this.osType = this.setVar('osType', this.osType, config);
     this.outDir = this.setVar('outDir', this.outDir, config);
+    this.relativePaths = this.setVar('relativePaths', this.relativePaths, config);
     this.port = this.setVar('port', this.port, config);
     this.proxy = this.setVar('proxy', this.proxy, config);
     this.requestUrl = this.setVar('requestUrl', this.requestUrl, config);
@@ -104,7 +106,7 @@ export class SeleniumServer extends ProviderClass implements ProviderInterface {
     });
     generateConfigFile(
         this.outDir, path.resolve(this.outDir, this.configFileName),
-        matchBinaries(), seleniumServerJar);
+        matchBinaries(), seleniumServerJar, this.relativePaths);
     return Promise.resolve();
   }
 

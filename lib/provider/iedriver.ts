@@ -15,6 +15,7 @@ export class IEDriver extends ProviderClass implements ProviderInterface {
   osType = os.type();
   osArch = os.arch();
   outDir = OUT_DIR;
+  relativePaths = false;
   proxy: string = null;
   requestUrl = 'https://selenium-release.storage.googleapis.com/';
   seleniumFlag = '-Dwebdriver.ie.driver';
@@ -29,6 +30,7 @@ export class IEDriver extends ProviderClass implements ProviderInterface {
     this.osArch = this.setVar('osArch', this.osArch, config);
     this.osType = this.setVar('osType', this.osType, config);
     this.outDir = this.setVar('outDir', this.outDir, config);
+    this.relativePaths = this.setVar('relativePaths', this.relativePaths, config);
     this.proxy = this.setVar('proxy', this.proxy, config);
     this.requestUrl = this.setVar('requestUrl', this.requestUrl, config);
     this.version = this.setVar('version', this.version, config);
@@ -88,7 +90,7 @@ export class IEDriver extends ProviderClass implements ProviderInterface {
         renameFileWithVersion(fileItem, '_' + versionObj.version);
     generateConfigFile(
         this.outDir, path.resolve(this.outDir, this.configFileName),
-        matchBinaries(this.osType), renamedFileName);
+        matchBinaries(this.osType), renamedFileName, this.relativePaths);
     return Promise.resolve();
   }
 

@@ -12,6 +12,8 @@ export interface Options {
   ignoreSSL?: boolean;
   // The location where files should be saved.
   outDir?: string;
+  // Use relative paths when storing file paths.
+  relativePaths?: boolean;
   // Use a github token for github requests.
   githubToken?: string;
 }

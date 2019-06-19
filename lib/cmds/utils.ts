@@ -19,6 +19,7 @@ export function addOptionsBinary(options: Options): OptionsBinary {
   const providerConfig: ProviderConfig = {
     ignoreSSL: options.ignoreSSL,
     outDir: options.outDir,
+    relativePaths: options.relativePaths,
     proxy: options.proxy
   };
 
@@ -76,6 +77,7 @@ export function convertArgs2Options(argv: yargs.Arguments): Options {
     server: null,
     ignoreSSL: argv.ignore_ssl as boolean,
     outDir: argv.out_dir as string,
+    relativePaths: argv.relativePaths as boolean,
     proxy: argv.proxy as string,
     githubToken: argv.github_token as string,
   };

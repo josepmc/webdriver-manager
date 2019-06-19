@@ -55,6 +55,10 @@ export interface ProviderConfig {
   // The location of the output directory where to store the cache file,
   // the config file and the binaries.
   outDir?: string;
+  // Whether the configuration will be storing relative paths
+  // By default absolute paths are stored, which means that it won't work
+  // when migrating it across multiple environments
+  relativePaths?: boolean;
   // The cache file name is just the file name and not the full path.
   // The file contains the body returned from the request url.
   cacheFileName?: string;
