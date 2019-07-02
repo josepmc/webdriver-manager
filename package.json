@@ -1,6 +1,6 @@
 {
   "name": "@josepmc/webdriver-manager",
-  "version": "13.0.0-1",
+  "version": "13.0.0-2",
   "description": "webdriver-manager",
   "bin": {
     "webdriver-manager": "bin/webdriver-manager"
@@ -17,9 +17,10 @@
     "jasmine": "jasmine",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "pretsc": "rm -rf dist/ && rm -rf downloads/",
+    "shx": "shx",
+    "pretsc": "shx rm -rf dist/ && shx rm -rf downloads/",
     "posttest": "npm run check",
-    "posttsc": "mkdir -p built/lib && mv dist/lib/legacy/config.* built/lib/ && rm -rf dist/lib/legacy",
+    "posttsc": "shx mkdir -p built/lib && shx mv dist/lib/legacy/config.* built/lib/ && shx rm -rf dist/lib/legacy",
     "proxy-server": "tsc && node dist/spec/server/proxy_server.js",
     "test": "tsc && npm run test-unit && npm run test-int && npm run test-proxy && npm run test-e2e",
     "test-e2e": "tsc && jasmine JASMINE_CONFIG_PATH=spec/jasmine-e2e.json",
@@ -82,6 +83,7 @@
     "http-proxy": "^1.17.0",
     "jasmine": "^3.3.1",
     "rimraf": "^2.6.2",
+    "shx": "^0.3.2",
     "tslint": "^5.11.0",
     "typescript": "^3.2.2"
   }

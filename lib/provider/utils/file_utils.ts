@@ -167,7 +167,7 @@ export function changeFilePermissions(
   }
 }
 
-function relativeToAbsolute(outputDir: string, obj: any, invert: boolean = false): any {
+export function relativeToAbsolute(outputDir: string, obj: any, invert: boolean = false): any {
   if (obj instanceof Array) {
     let newObj = [];
     for (let key of obj) {

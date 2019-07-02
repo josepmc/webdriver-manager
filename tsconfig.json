@@ -25,6 +25,7 @@
     ],
   },
   "exclude": [
+    "built",
     "dist",
     "node_modules"
   ]
